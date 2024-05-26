@@ -16,10 +16,10 @@ app.use(express.json());
 app.use("/api/tasks", taskRouter);
 
 // UNCOMMENT BELOW//
-// app.use(express.static(path.join(__dirname, "..", "/client/dist")));
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "..", "client", "dist", "index.html"));
-// });
+app.use(express.static(path.join(__dirname, "..", "/client/dist")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "client", "dist", "index.html"));
+});
 
 app.all("*", (req, res, next) => {
   const err = new Error(`Can't find ${req.originalUrl} on this server`);
