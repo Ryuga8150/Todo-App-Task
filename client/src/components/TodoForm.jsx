@@ -13,23 +13,23 @@ function TodoForm() {
   console.log("TODO FORM");
   const handleUpdateTask = async () => {
     try {
-      // const formData = { title, description, date, status };
-      // console.log(formData);
-      // const res = await fetch(`/api/tasks/${id}`, {
-      //   // Adding method type
-      //   method: "PUT",
-      //   // Adding body or contents to send
-      //   body: JSON.stringify(formData),
-      //   // Adding headers to the request
-      //   headers: {
-      //     "Content-type": "application/json",
-      //   },
-      // });
-      // const data = await res.json();
-      // if (!data || data.status !== "success")
-      //   throw new Error("Something Went Wrong!!!");
-      // toast.success("Task Created SuccessFully");
-      // navigate("/");
+      const formData = { title, description, date, status };
+      console.log(formData);
+      const res = await fetch(`/api/tasks/${id}`, {
+        // Adding method type
+        method: "PUT",
+        // Adding body or contents to send
+        body: JSON.stringify(formData),
+        // Adding headers to the request
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
+      const data = await res.json();
+      if (!data || data.status !== "success")
+        throw new Error("Something Went Wrong!!!");
+      toast.success("Task Created SuccessFully");
+      navigate("/");
     } catch (err) {
       console.log(err);
       toast.error(err.message);
@@ -100,7 +100,6 @@ function TodoForm() {
 
             if (!data || data.status !== "success")
               throw new Error("Oops Something went wrong!!");
-            console.log(data);
 
             const task = data.data.task;
 

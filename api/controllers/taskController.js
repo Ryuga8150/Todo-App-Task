@@ -27,7 +27,7 @@ exports.getTask = async (req, res) => {
 };
 
 exports.createTask = catchAsync(async (req, res) => {
-  const taskId = "#" + crypto.randomBytes(6).toString("hex").substring(0, 6);
+  const taskId = crypto.randomBytes(6).toString("hex").substring(0, 6);
   const task = { id: taskId, ...req.body };
 
   tasks.push(task);
@@ -45,7 +45,7 @@ exports.updateTask = catchAsync(async (req, res) => {
 
   tasks = tasks.filter((task) => task.id !== taskId);
 
-  tasks.push({ taskId, ...req.body });
+  tasks.push({ id: taskId, ...req.body });
 
   res.status(200).json({
     status: "success",
@@ -53,7 +53,6 @@ exports.updateTask = catchAsync(async (req, res) => {
 });
 
 exports.deleteTask = catchAsync(async (req, res) => {
-  console.log("delete task");
   const taskId = req.params.id;
 
   tasks = tasks.filter((task) => task.id !== taskId);

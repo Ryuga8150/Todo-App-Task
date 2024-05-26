@@ -7,7 +7,7 @@ import { toast } from "sonner";
 function TodoTable() {
   const [activeTask, setActiveTask] = useState(0);
   const [tasks, setTasks] = useState([]);
-  console.log(tasks);
+
   useEffect(function () {
     const getTasks = async () => {
       try {
@@ -16,7 +16,7 @@ function TodoTable() {
 
         if (!data || data.status !== "success")
           throw new Error("Oops Something went wrong!!");
-        console.log(data);
+
         setTasks(data.data.tasks);
       } catch (err) {
         console.log(err);
@@ -64,6 +64,7 @@ function TodoTable() {
             active={activeTask}
             onActive={setActiveTask}
             task={task}
+            onSetTasks={setTasks}
           />
         ))}
       </div>

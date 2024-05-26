@@ -8,9 +8,10 @@ TodoTableRow.propTypes = {
   active: PropTypes.bool,
   onActive: PropTypes.func,
   task: PropTypes.object,
+  onSetTasks: PropTypes.func,
 };
 
-function TodoTableRow({ task, active, onActive }) {
+function TodoTableRow({ task, active, onActive, onSetTasks }) {
   const navigate = useNavigate();
 
   async function handleDeleteTask() {
@@ -25,6 +26,9 @@ function TodoTableRow({ task, active, onActive }) {
         throw new Error(!data ? "Something Went Wrong!!!" : data.message);
 
       toast.success("Task Deleted SuccessFully");
+      onSetTasks((tasks) =>
+        tasks.filter((currTask) => currTask.id !== task.id),
+      );
     } catch (err) {
       console.log(err);
       toast.error(err.message);
